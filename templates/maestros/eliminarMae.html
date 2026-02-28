@@ -8,6 +8,11 @@
     <form method="POST" class="w-full max-w-md mx-auto">
         {{ form.csrf_token }}
 
+        <div class="relative z-0 w-full mb-5 group">
+            {{ macros.camposNuevos(form.matricula, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent
+            border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
+            focus:border-brand peer") }}
+        </div>
         <div class="grid md:grid-cols-2 md:gap-6">
 
             <div class="relative z-0 w-full mb-5 group">
@@ -22,7 +27,6 @@
                 focus:border-brand peer") }}
             </div>
 
-
             <div class="relative z-0 w-full mb-5 group">
                 {{ macros.camposNuevos(form.especialidad, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent
                 border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
@@ -36,21 +40,20 @@
                 peer") }}
             </div>
 
-
         </div>
 
         <div class="mt-6">
             <button type="submit"
                 class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                Submit
+            Eliminar
             </button>
         </div>
-        <div class="flex mt-4 md:mt-6 gap-4">
-                <a href="/index"
-                    class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Regresar
-                </a>
-            </div>
+        <div class="mt-6">
+            <a href="{{ url_for('maestros.index') }}"
+                class="inline-block text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none text-center">
+                Cancelar
+            </a>
+        </div>
 
     </form>
 
