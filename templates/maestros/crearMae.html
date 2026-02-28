@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block container %}
+{% import "_macros.html" as macros %}
+
+<div class="flex items-center justify-center w-full min-h-[70vh]">
+
+    <form method="POST" class="w-full max-w-md mx-auto">
+        {{ form.csrf_token }}
+
+        <div class="grid md:grid-cols-2 md:gap-6">
+
+            <div class="relative z-0 w-full mb-5 group">
+                {{ macros.camposNuevos(form.nombre, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent
+                border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
+                focus:border-brand peer") }}
+            </div>
+
+            <div class="relative z-0 w-full mb-5 group">
+                {{ macros.camposNuevos(form.apellidos, class="block py-2.5 px-0 w-full text-sm text-heading
+                bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
+                focus:border-brand peer") }}
+            </div>
+
+
+            <div class="relative z-0 w-full mb-5 group">
+                {{ macros.camposNuevos(form.especialidad, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent
+                border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
+                focus:border-brand
+                peer") }}
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                {{ macros.camposNuevos(form.email, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent
+                border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
+                focus:border-brand
+                peer") }}
+            </div>
+
+
+        </div>
+
+        <div class="mt-6">
+            <button type="submit"
+                class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                Submit
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
