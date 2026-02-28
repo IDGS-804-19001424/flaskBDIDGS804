@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex flex-col items-center justify-center w-full min-h-[70vh] py-10 gap-8">
+
+    <div class="relative bg-neutral-primary-soft max-w-md w-full p-6 border border-default rounded-base shadow-xs">
+        <div class="flex flex-col items-center">
+            <div class="w-20 h-20 mb-6 rounded-full bg-brand flex items-center justify-center text-white">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+            </div>
+            
+            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-heading text-center">
+                {{ curso.nombre }}
+            </h5>
+            <span class="text-md text-body text-center mt-1 font-medium">Maestro: {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}</span>
+            <span class="text-sm text-body text-center mt-3 bg-neutral-primary-medium p-3 rounded-md w-full">{{ curso.descripcion }}</span>
+            
+            <div class="flex mt-6 gap-4">
+                <a href="{{ url_for('cursos.index') }}"
+                    class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                    Regresar a Cursos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full max-w-4xl relative overflow-x-auto sm:rounded-lg border border-default-medium mt-4">
+        <h3 class="text-xl font-bold p-4 bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+            Alumnos Inscritos ({{ curso.alumnos|length }})
+        </h3>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-800 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Matrícula/ID</th>
+                    <th scope="col" class="px-6 py-3">Nombre Completo</th>
+                    <th scope="col" class="px-6 py-3">Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alumno in curso.alumnos %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ alumno.id }}
+                    </td>
+                    <td class="px-6 py-4">{{ alumno.nombre }} {{ alumno.apellidos }}</td>
+                    <td class="px-6 py-4">{{ alumno.email }}</td>
+                </tr>
+                {% else %}
+                <tr class="bg-white border-b dark:bg-gray-800">
+                    <td colspan="3" class="px-6 py-8 text-center text-gray-500">
+                        No hay alumnos inscritos en este curso todavía.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    <div class="w-full max-w-4xl bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-default-medium mt-6">
+        <form action="{{ url_for('cursos.agregar_alumno_rapido', curso_id=curso.id) }}" method="POST" class="flex flex-col md:flex-row gap-4 items-end">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            
+            <div class="w-full">
+                <label for="alumno_id" class="block mb-2 text-sm font-medium text-heading">Inscribir nuevo alumno a este curso:</label>
+                <select name="alumno_id" id="alumno_id" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand focus:border-brand block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="" disabled selected>Selecciona un alumno disponible...</option>
+                    {% for alumno in alumnos_disponibles %}
+                        <option value="{{ alumno.id }}">{{ alumno.nombre }} {{ alumno.apellidos }}</option>
+                    {% else %}
+                        <option value="" disabled>Todos los alumnos ya están inscritos</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" 
+                class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none w-full md:w-auto whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Agregar
+                </div>
+            </button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

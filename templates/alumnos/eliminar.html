@@ -34,7 +34,8 @@
                 peer") }}
             </div>
             <div class="relative z-0 w-full mb-5 group">
-                {{ macros.camposNuevos(form.telefono, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent
+                {{ macros.camposNuevos(form.telefono, class="block py-2.5 px-0 w-full text-sm text-heading
+                bg-transparent
                 border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0
                 focus:border-brand
                 peer") }}
@@ -45,11 +46,11 @@
         <div class="mt-6">
             <button type="submit"
                 class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-            Eliminar
+                Eliminar
             </button>
         </div>
         <div class="mt-6">
-            <a href="{{ url_for('index') }}"
+            <a href="{{ url_for('alumnos.index') }}"
                 class="inline-block text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none text-center">
                 Cancelar
             </a>
